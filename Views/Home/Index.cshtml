@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+
+    var fetchInterval = ViewBag.FetchInterval;
+    var treshold = ViewBag.Treshold;
+
+}
+<div class="result alert alert-success">
+
+</div>
+<hr />
+    <div class="row m-lg-3 align-items-center mb-4">
+        <div class="col-auto">
+            <label class="col-form-label">Fetch Interval in Seconds:</label>
+        </div>
+        <div class="col-auto">
+            <input class="form-control" type="number" id="fetch-interval" value="@fetchInterval" />
+        </div>
+        <div class="col-auto">
+            <label class="col-form-label">Treshold:</label>
+        </div>
+        <div class="col-auto">
+            <input class="form-control" type="text" id="treshold" value="@treshold" />
+        </div>
+        <div class="col-auto">
+            <button class="btn btn-primary btn-go" type="button">GO</button>
+        </div>
+        <div class="ml-auto d-flex counter"></div>
+    </div>
+
+<table class="table table-sm table-binance table-hover table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Symbol</th>
+            <th scope="col">PriceChange</th>
+            <th scope="col">Change%</th>
+            <th scope="col">LastPrice</th>
+            <th scope="col">HighPrice</th>
+            <th scope="col">LowPrice</th>
+            <th scope="col">Volume</th>
+            <th scope="col">Volume Change</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+@section Scripts {
+
+    <script>
+        $(document).ready(function () {
+            console.log("ready");
+            fetchData();
+            $('.btn-go').on("click", function (e) {
+                e.preventDefault();
+                document.location.href = '/' + $('#fetch-interval').val() + '/' + $('#treshold').val();
+            });
+        });
+    </script>
+}
